@@ -1,11 +1,11 @@
-"""API routes"""
+"""API routes module"""
 
 from fastapi import APIRouter
-from . import routes
 
 router = APIRouter(prefix="/api")
 
-from . import routes as api_routes
-router.include_router(api_routes.health.router, tags=["health"])
-router.include_router(api_routes.files.router, tags=["files"])
-router.include_router(api_routes.analysis.router, tags=["analysis"])
+from . import health, files, analysis
+
+router.include_router(health.router, tags=["health"])
+router.include_router(files.router, tags=["files"])
+router.include_router(analysis.router, tags=["analysis"])

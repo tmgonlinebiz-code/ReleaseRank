@@ -2,7 +2,7 @@
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import routes
+from app.api.routes import router
 from app.core.config import settings
 
 app = FastAPI(
@@ -21,7 +21,7 @@ app.add_middleware(
 )
 
 # Include API routes
-app.include_router(routes.router)
+app.include_router(router)
 
 
 @app.get("/")
