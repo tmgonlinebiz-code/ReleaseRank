@@ -2,7 +2,7 @@
 
 from pydantic import BaseModel, Field
 from datetime import datetime
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 
 class AudioFileBase(BaseModel):
@@ -36,6 +36,29 @@ class FileUploadResponse(BaseModel):
     size: int
     uploaded_at: datetime
     message: str = "File uploaded successfully"
+
+
+class SpectralBalance(BaseModel):
+    """Spectral balance metrics"""
+    low_freq_percent: float = Field(..., ge=0, le=100, description="Energy below 250Hz (%)")
+    mid_freq_percent: float = Field(..., ge=0, le=100, description="Energy 250Hz-4kHz (%)")
+    high_freq_percent: float = Field(..., ge=0, le=100, description="Energy above 4kHz (%)")
+
+
+class AudioAnalysisResponse(BaseModel):
+    """Complete audio analysis response with measurable metrics"""
+    file_id: str
+    duration: float = Field(..., ge=0, description="Duration in seconds")
+    peak_level: float = Field(..., description="Peak amplitude in dB")
+    rms_loudness: float = Field(..., description="RMS loudness in dB")
+    dynamic_range: float = Field(..., ge=0, le=100, description="Dynamic range in dB")
+    bpm_estimate: float = Field(..., ge=0, description="Estimated tempo (BPM)")
+    spectral_balance: SpectralBalance = Field(..., description="Frequency energy distribution")
+    energy_first_10s: float = Field(..., description="Energy of first 10 seconds (dB)")
+    energy_first_30s: float = Field(..., description="Energy of first 30 seconds (dB)")
+    clipping_detected: bool = Field(..., description="Whether audio contains clipping")
+    clipping_percentage: float = Field(..., ge=0, le=100, description="Percentage of samples clipping")
+    retention_score: float = Field(..., ge=0, le=100, description="Estimated listener retention score")
 
 
 class AnalysisResult(BaseModel):
