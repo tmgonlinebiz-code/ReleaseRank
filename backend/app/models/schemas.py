@@ -71,7 +71,28 @@ class AnalysisResult(BaseModel):
 
 class ComparisonRequest(BaseModel):
     """Comparison request schema"""
-    file_ids: List[str] = Field(..., min_items=2)
+    file_ids: List[str] = Field(..., min_items=2, max_items=10)
+
+
+class RankedFile(BaseModel):
+    """Ranked file in the results"""
+    rank: int = Field(..., ge=1, le=10)
+    file_id: str
+    overall_score: float = Field(..., ge=0, le=100)
+    youtube_score: float = Field(..., ge=0, le=100)
+    spotify_score: float = Field(..., ge=0, le=100)
+    commercial_score: float = Field(..., ge=0, le=100)
+    retention_score: float = Field(..., ge=0, le=100)
+    confidence: float = Field(..., ge=0, le=100)
+    explanation: str
+    metrics: AudioAnalysisResponse
+
+
+class WorkflowResponse(BaseModel):
+    """Complete workflow response with ranking"""
+    winner: RankedFile = Field(..., description="Best ranked file")
+    ranked: List[RankedFile] = Field(..., description="All files ranked from best to worst")
+    total_files: int = Field(..., ge=2, le=10)
 
 
 class ComparisonResponse(BaseModel):

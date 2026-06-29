@@ -1,0 +1,83 @@
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ranking-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ranking-item:active {
+  background: #f9fafb;
+  transform: scale(0.98);
+}
+
+.ranking-number {
+  font-size: 24px;
+  font-weight: 700;
+  min-width: 32px;
+  text-align: center;
+}
+
+.ranking-info {
+  flex: 1;
+}
+
+.ranking-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 4px 0;
+}
+
+.ranking-scores {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.mini-score {
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.ranking-overall {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+}
+
+.overall-score {
+  font-size: 20px;
+  font-weight: 700;
+  color: #667eea;
+}
+
+.ranking-arrow {
+  font-size: 18px;
+  color: #d1d5db;
+}
+
+@media (min-width: 640px) {
+  .ranking-item {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .ranking-number {
+    font-size: 28px;
+  }
+}
