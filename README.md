@@ -32,7 +32,6 @@ ReleaseRank/
 - Python 3.11+
 - FastAPI
 - Pydantic
-- SQLAlchemy (optional for DB integration)
 
 ## Getting Started
 
